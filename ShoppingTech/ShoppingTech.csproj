@@ -92,6 +92,20 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\productimg\E1914H.jpg" />
+    <Content Include="Content\productimg\G4070_59436675.jpg" />
+    <Content Include="Content\productimg\H5050G3250.jpg" />
+    <Content Include="Content\productimg\HP15-R208TU.jpg" />
+    <Content Include="Content\productimg\HP280G1MT.jpg" />
+    <Content Include="Content\productimg\K30ADVN017D.jpg" />
+    <Content Include="Content\productimg\LS22D390HSXV.jpg" />
+    <Content Include="Content\productimg\N5548_M5I52652.jpg" />
+    <Content Include="Content\productimg\P550LDV-XO516H.jpg" />
+    <Content Include="Content\productimg\S19C300B.jpg" />
+    <Content Include="Content\productimg\tc703.jpg" />
+    <Content Include="Content\productimg\U2414H.jpg" />
+    <Content Include="Content\productimg\V3900MTG1840.jpg" />
+    <Content Include="Content\productimg\XC605G32401T.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -121,6 +135,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
