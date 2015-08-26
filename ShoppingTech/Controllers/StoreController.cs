@@ -1,22 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ShoppingTech.Service;
 
 namespace ShoppingTech.Controllers
 {
     public class StoreController : Controller
     {
-        // GET: Store
-        public ActionResult Index()
+        private readonly StoreService _store;
+        public StoreController() : this(new StoreService()) {}
+
+        public StoreController(StoreService service)
         {
-            return View();
+            _store = service;
         }
 
-        public ActionResult Browse(string Id)
+        // GET: Store
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var categories = await _store.GetCategoriesAsync();
+            return View(categories);
+        }
+
+        public async Task<ActionResult> Browse(string categoryName)
+        {
+            var products = await _store.GetProductsForCategoryAsync(categoryName);
+            return View(products);
         }
 
         public ActionResult Details(int Id)

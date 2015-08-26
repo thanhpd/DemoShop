@@ -92,15 +92,18 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\productimg\display.jpg" />
     <Content Include="Content\productimg\E1914H.jpg" />
     <Content Include="Content\productimg\G4070_59436675.jpg" />
     <Content Include="Content\productimg\H5050G3250.jpg" />
     <Content Include="Content\productimg\HP15-R208TU.jpg" />
     <Content Include="Content\productimg\HP280G1MT.jpg" />
     <Content Include="Content\productimg\K30ADVN017D.jpg" />
+    <Content Include="Content\productimg\laptop.jpg" />
     <Content Include="Content\productimg\LS22D390HSXV.jpg" />
     <Content Include="Content\productimg\N5548_M5I52652.jpg" />
     <Content Include="Content\productimg\P550LDV-XO516H.jpg" />
+    <Content Include="Content\productimg\PC.jpg" />
     <Content Include="Content\productimg\S19C300B.jpg" />
     <Content Include="Content\productimg\tc703.jpg" />
     <Content Include="Content\productimg\U2414H.jpg" />
@@ -125,12 +128,12 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="DAL\CartItem.cs" />
     <Compile Include="DAL\Category.cs" />
     <Compile Include="DAL\Product.cs" />
     <Compile Include="DAL\StoreContext.cs" />
