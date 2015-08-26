@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using ShoppingTech.Models;
 
 namespace ShoppingTech.DAL
 {
     public class StoreContext : DbContext
     {
-        public StoreContext() : base("DefaultConnection") { }
+        public StoreContext() : base("DefaultConnection")
+        {
+        }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
