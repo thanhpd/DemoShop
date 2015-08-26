@@ -25,9 +25,13 @@ namespace ShoppingTech.Controllers
             return View(categories);
         }
 
-        public async Task<ActionResult> Browse(string categoryName)
+        public async Task<ActionResult> Browse(string id)
         {
-            var products = await _store.GetProductsForCategoryAsync(categoryName);
+            var products = await _store.GetProductsForCategoryAsync(id);
+
+            if (!products.Any()) return HttpNotFound();
+
+            ViewBag.CategoryName = id;
             return View(products);
         }
 

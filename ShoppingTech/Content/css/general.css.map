@@ -1,0 +1,10 @@
+﻿{
+	"version": 3,
+	"file": "general.css",
+	"sources": [
+		"general.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "AAGA,SAAS,CAAC;EACN,SAAS,EAAE,KAAM;CADV",
+	"names": []
+}

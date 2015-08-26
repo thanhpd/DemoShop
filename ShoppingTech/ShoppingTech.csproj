@@ -92,6 +92,13 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\general.css">
+      <DependentUpon>general.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\general.min.css">
+      <DependentUpon>general.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\normalize.css" />
     <Content Include="Content\productimg\display.jpg" />
     <Content Include="Content\productimg\E1914H.jpg" />
     <Content Include="Content\productimg\G4070_59436675.jpg" />
@@ -117,6 +124,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\css\general.scss" />
+    <Content Include="Content\css\general.css.map">
+      <DependentUpon>general.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
