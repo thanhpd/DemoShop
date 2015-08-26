@@ -2,20 +2,37 @@
 
 @{
     ViewBag.Title = "Browse";
+    var active = "";
 }
 
 <h2>Products in @ViewBag.CategoryName category</h2>
 
-@foreach (var product in Model)
-{
-    <div class="col-lg-3 col-md-3 col-xs-3 col-sm-6">
-        <div class="panel panel-success">
-            <div class="panel-body">
-                <a href='@Url.Action("Details", "Store", new { id = product.ProductId })'>
-                    <img class="item-img" src="@product.ImageUrl" alt="@product.Name" />
-                </a>
-            </div>
-            <div class="panel-footer">@Html.ActionLink(product.Name, "Details", new { id = product.ProductId })</div>
+@section Sidebar {
+    <div class="col-sm-3">
+        <div class="list-group">
+            @foreach (var category in ViewBag.ListCat)
+            {
+                active = ViewBag.CategoryName == category.Name ? "active" : "";
+                <a href="@Url.Action("Browse", "Store", new {id = category.Name})" class="list-group-item @active ">@category.Name</a>
+            }
         </div>
     </div>
 }
+
+<div class="col-sm-9">
+
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <a href='@Url.Action("Details", "Store", new {id = product.ProductId})'>
+                        <img class="item-img" src="@product.ImageUrl" alt="@product.Name"/>
+                    </a>
+                    <strong class="price-item">@product.ListPrice</strong>
+                </div>
+                <div class="panel-footer">@Html.ActionLink(product.Name, "Details", new { id = product.ProductId })</div>
+            </div>
+        </div>
+    }
+</div>

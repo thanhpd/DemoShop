@@ -1,5 +1,10 @@
 ﻿.item-img {
-  max-width: 230px;
+  max-width: 100%;
+  max-height: 215px;
+}
+
+.price-item {
+  color: red;
 }
 
 /*# sourceMappingURL=general.css.map */

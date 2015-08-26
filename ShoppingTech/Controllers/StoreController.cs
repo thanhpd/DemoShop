@@ -28,6 +28,7 @@ namespace ShoppingTech.Controllers
         public async Task<ActionResult> Browse(string id)
         {
             var products = await _store.GetProductsForCategoryAsync(id);
+            ViewBag.ListCat = await _store.GetCategoriesAsync();
 
             if (!products.Any()) return HttpNotFound();
 
@@ -35,9 +36,14 @@ namespace ShoppingTech.Controllers
             return View(products);
         }
 
-        public ActionResult Details(int Id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            return View();
+            var product = await _store.GetProductByIdAsync(id);
+            ViewBag.ListCat = await _store.GetCategoriesAsync();
+
+            if (product == null) return HttpNotFound();
+
+            return View(product);
         }
     }
 }
