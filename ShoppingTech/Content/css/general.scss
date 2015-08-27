@@ -9,3 +9,12 @@
 .price-item {
     color: red;    
 }
+
+form label {
+    font-weight: bold;
+}
+
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}

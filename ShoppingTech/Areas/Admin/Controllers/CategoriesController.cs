@@ -9,8 +9,10 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using ShoppingTech.DAL;
 using ShoppingTech.Helper;
 
@@ -72,25 +74,10 @@ namespace ShoppingTech.Areas.Admin.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        //// POST: api/Categories
-        //[ResponseType(typeof(Category))]
-        //public async Task<IHttpActionResult> PostCategory(Category category)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Categories.Add(category);
-        //    await db.SaveChangesAsync();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
-        //}
+        }        
 
         // POST: api/Categories        
-        public async Task<HttpResponseMessage> PostCategory()
+        public async Task<IHttpActionResult> PostCategory()
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -103,6 +90,16 @@ namespace ShoppingTech.Areas.Admin.Controllers
 
             try
             {
+                //read content into a buffer
+                Request.Content.LoadIntoBufferAsync().Wait();
+
+                //Request.Content.ReadAsStringAsync().ContinueWith(t =>
+                //{
+                //    apiRequest.Content = t.Result;
+                //    _repo.Add(apiRequest);
+                //});
+
+
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
 
@@ -113,26 +110,21 @@ namespace ShoppingTech.Areas.Admin.Controllers
                     categoryName = provider.FormData.GetValues("cat-name")[0];
                 }
 
-                // This illustrates how to get the file names.
-                foreach (MultipartFileData file in provider.FileData)
+                var fileName = FileNameHelper.GetFileNameFromLocalPath(provider.FileData[0].LocalFileName);
+                var path = WebConfigurationManager.AppSettings["ImageUrlPath"];
+                Category category = new Category
                 {
-                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server file path: " + file.LocalFileName);
-                }                
+                    Name = categoryName,
+                    ImageUrl = String.Format("{0}/{1}", path, fileName)
+                };
+                db.Categories.Add(category);
+                await db.SaveChangesAsync();
 
-                // Show all the key-value pairs.
-                foreach (var key in provider.FormData.AllKeys)
-                {
-                    foreach (var val in provider.FormData.GetValues(key))
-                    {
-                        Trace.WriteLine(string.Format("{0}: {1}", key, val));
-                    }
-                }
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);                          
             }
             catch (System.Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return InternalServerError(e);
             }
         }
 

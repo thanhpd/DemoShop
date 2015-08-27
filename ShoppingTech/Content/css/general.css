@@ -7,4 +7,13 @@
   color: red;
 }
 
+form label {
+  font-weight: bold;
+}
+
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}
+
 /*# sourceMappingURL=general.css.map */
