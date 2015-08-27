@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.UI
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -56,7 +57,7 @@
     </nav>
 
     <div class="container">
-        @RenderSection("Sidebar", required: false)
+        @RenderSection("Sidebar", required: false)        
         @RenderBody()
     </div>
 

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ShoppingTech.DAL;
+using ShoppingTech.Helper;
 
 namespace ShoppingTech.Areas.Admin.Controllers
 {
@@ -71,19 +74,66 @@ namespace ShoppingTech.Areas.Admin.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Categories
-        [ResponseType(typeof(Category))]
-        public async Task<IHttpActionResult> PostCategory(Category category)
+        //// POST: api/Categories
+        //[ResponseType(typeof(Category))]
+        //public async Task<IHttpActionResult> PostCategory(Category category)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    db.Categories.Add(category);
+        //    await db.SaveChangesAsync();
+
+        //    return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
+        //}
+
+        // POST: api/Categories        
+        public async Task<HttpResponseMessage> PostCategory()
         {
-            if (!ModelState.IsValid)
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                return BadRequest(ModelState);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            db.Categories.Add(category);
-            await db.SaveChangesAsync();
+            string root = HttpContext.Current.Server.MapPath("~/Resources/img");
+            var provider = new CustomMultipartFormDataStreamProvider(root);
 
-            return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
+            try
+            {
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                var categoryName = "notfound";
+
+                if (provider.FormData.AllKeys.Contains("cat-name"))
+                {
+                    categoryName = provider.FormData.GetValues("cat-name")[0];
+                }
+
+                // This illustrates how to get the file names.
+                foreach (MultipartFileData file in provider.FileData)
+                {
+                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
+                    Trace.WriteLine("Server file path: " + file.LocalFileName);
+                }                
+
+                // Show all the key-value pairs.
+                foreach (var key in provider.FormData.AllKeys)
+                {
+                    foreach (var val in provider.FormData.GetValues(key))
+                    {
+                        Trace.WriteLine(string.Format("{0}: {1}", key, val));
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (System.Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         // DELETE: api/Categories/5

@@ -16,6 +16,12 @@ namespace ShoppingTech
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "CustomApiRoute", 
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { controller = "Categories", action = "GetCategories", id = RouteParameter.Optional }
+            );
         }
     }
 }

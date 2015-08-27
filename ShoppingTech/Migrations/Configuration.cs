@@ -18,9 +18,9 @@ namespace ShoppingTech.Migrations
 
         protected override void Seed(StoreContext context)
         {
-            var pc = new Category {Name = "PC", ImageUrl = "/Content/productimg/PC.jpg"};
-            var laptop = new Category { Name = "Laptop", ImageUrl = "/Content/productimg/laptop.jpg" };
-            var display = new Category { Name = "Display", ImageUrl = "/Content/productimg/display.jpg" };
+            var pc = new Category {Name = "PC", ImageUrl = "/Resources/img/PC.jpg"};
+            var laptop = new Category { Name = "Laptop", ImageUrl = "/Resources/img/laptop.jpg" };
+            var display = new Category { Name = "Display", ImageUrl = "/Resources/img/display.jpg" };
 
             context.Categories.AddOrUpdate(
                 c => c.Name,
@@ -40,7 +40,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 4889000,
                     Name = "ACER ASPIRE TC703 CELERON J1900",
                     ProductCode = "TC703",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "TC703")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "TC703")
                 },
                 new Product
                 {
@@ -51,7 +51,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 5299000,
                     Name = "ASUS K30AD-VN017D",
                     ProductCode = "K30ADVN017D",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "K30ADVN017D")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "K30ADVN017D")
                 },
                 new Product
                 {
@@ -62,7 +62,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 5999000,
                     Name = "LENOVO H50-50-G3250",
                     ProductCode = "H5050G3250",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "H5050G3250")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "H5050G3250")
                 },
                 new Product
                 {
@@ -73,7 +73,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 4889000,
                     Name = "DELL VOSTRO 3900MTG1840",
                     ProductCode = "V3900MTG1840",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "V3900MTG1840")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "V3900MTG1840")
                 },
                 new Product
                 {
@@ -84,7 +84,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 6599000,
                     Name = "HP 280 G1 MT",
                     ProductCode = "HP280G1MT",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "HP280G1MT")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "HP280G1MT")
                 },
                 new Product
                 {
@@ -95,7 +95,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 6099000,
                     Name = "ACER ASPIRE XC605-G32401T",
                     ProductCode = "XC605G32401T",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "XC605G32401T")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "XC605G32401T")
                 },
                 new Product
                 {
@@ -106,7 +106,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 14999000,
                     Name = "DELL INSPIRON N5548-M5I52652",
                     ProductCode = "N5548_M5I52652",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "N5548_M5I52652")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "N5548_M5I52652")
                 },
                 new Product
                 {
@@ -117,7 +117,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 11999000,
                     Name = "ASUS P550LDV-XO516H",
                     ProductCode = "P550LDV-XO516H",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "P550LDV-XO516H")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "P550LDV-XO516H")
                 },
                 new Product
                 {
@@ -128,7 +128,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 9499000,
                     Name = "HP 15-R208TU",
                     ProductCode = "HP15-R208TU",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "HP15-R208TU")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "HP15-R208TU")
                 },
                 new Product
                 {
@@ -139,7 +139,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 7999000,
                     Name = "LENOVO G4070-59436675",
                     ProductCode = "G4070_59436675",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "G4070_59436675")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "G4070_59436675")
                 },
                 new Product
                 {
@@ -150,7 +150,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 1999000,
                     Name = "DELL E1914H",
                     ProductCode = "E1914H",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "E1914H")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "E1914H")
                 },
                 new Product
                 {
@@ -161,7 +161,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 1499000,
                     Name = "LED SAMSUNG S19C300B",
                     ProductCode = "S19C300B",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "S19C300B")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "S19C300B")
                 },
                 new Product
                 {
@@ -172,7 +172,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 5199000,
                     Name = "DELL ULTRASHARP U2414H LED",
                     ProductCode = "U2414H",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "U2414H")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "U2414H")
                 },
                 new Product
                 {
@@ -183,7 +183,7 @@ namespace ShoppingTech.Migrations
                     ListPrice = 2999000,
                     Name = "SAMSUNG LS22D390HSXV",
                     ProductCode = "LS22D390HSXV",
-                    ImageUrl = String.Format("/Content/productimg/{0}.jpg", "LS22D390HSXV")
+                    ImageUrl = String.Format("/Resources/img/{0}.jpg", "LS22D390HSXV")
                 }
                 );
         }
