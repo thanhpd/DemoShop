@@ -12,7 +12,35 @@ $("#addModal").submit(function (event) {
 
     console.log(formData);
     $.ajax({
-        url: '../../api/Categories',
+        url: '../../api/Categories/CreateCategory',
+        type: 'POST',
+        data: formData,
+        async: true,
+        cache: false,
+        mimeType: "multipart/form-data",
+        contentType: false,
+        processData: false,
+        success: function (data, textStatus, jqXHR) {
+            window.location.reload();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(textStatus);
+        }
+    });
+    return false;
+});
+
+$("#editModal").submit(function (event) {
+    //disable the default form submission
+    event.preventDefault();
+
+    //grab all form data  
+    var form = document.getElementById('edit-cat-form');
+    var formData = new FormData(form);
+    console.log(formData);
+    
+    $.ajax({
+        url: '../../api/Categories/EditCategory',
         type: 'POST',
         data: formData,
         async: true,
@@ -47,8 +75,8 @@ $('#delete-cat').on('click', function(e) {
     console.log(rowId);
 
     $.ajax({
-        url: '../../api/Categories/' + rowId,
-        type: 'DELETE',
+        url: '../../api/Categories/DeleteCategory?id='+rowId,
+        type: 'DELETE',        
         async: true,
         success: function(data, textStatus, jqXHR) {
             window.location.reload();
@@ -86,11 +114,10 @@ $(".edit-category").on("click", function (e) {
     $('#edit-cat-name')[0].value = th[1].innerText;
     
     $('#editModal').on('show.bs.modal', function () {
-        $('#editModal').find('#cat-id').html(rowId);
+        $('#editModal').find('#cat-id').val(rowId);
         // assign Category img input
-        var img = th[2].firstElementChild;
-        console.log(img);        
+        var img = th[2].firstElementChild;             
         $('#edit-img-preview')[0].src = img.src;
     });
-
 })
+

@@ -43,13 +43,13 @@
                 <h4 class="modal-title" id="editModalLabel">Edit category</h4>
             </div>
             <div class="modal-body">
-                <form name="edit-form" method="post" enctype="multipart/form-data" action="api/upload">
+                <form id="edit-cat-form" name="edit-form" method="post" enctype="multipart/form-data">
                     <div>
-                        <label>Category ID</label>
-                        <label id="cat-id"></label>
+                        <label>Category ID</label><br/>                        
+                        <input name="cat-id" type="text" id="cat-id" disabled="disabled"/>
                     </div>
                     <div>
-                        <label for="edit-cat-name">Category Name</label>
+                        <label for="edit-cat-name">Category Name</label><br/>
                         <input name="cat-name" type="text" id="edit-cat-name"/>
                     </div>
                     <div>

@@ -18,11 +18,14 @@ using ShoppingTech.Helper;
 
 namespace ShoppingTech.Areas.Admin.Controllers
 {
+    [RoutePrefix("api/Categories")]
     public class CategoriesController : ApiController
     {
         private StoreContext db = new StoreContext();
 
         // GET: api/Categories
+        [HttpGet]
+        [Route("GetCategories")]
         public IQueryable<Category> GetCategories()
         {
             return db.Categories;
@@ -30,6 +33,8 @@ namespace ShoppingTech.Areas.Admin.Controllers
 
         // GET: api/Categories/5
         [ResponseType(typeof(Category))]
+        [HttpGet]
+        [Route("GetCategory")]
         public async Task<IHttpActionResult> GetCategory(Guid id)
         {
             Category category = await db.Categories.FindAsync(id);
@@ -41,43 +46,87 @@ namespace ShoppingTech.Areas.Admin.Controllers
             return Ok(category);
         }
 
-        // PUT: api/Categories/5
+        // POST: api/Categories/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCategory(Guid id, Category category)
+        [HttpPost]
+        [Route("EditCategory")]
+        public async Task<IHttpActionResult> EditCategory()
         {
-            if (!ModelState.IsValid)
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //if (id != category.CategoryId)
+            //{
+            //    return BadRequest();
+            //}
+
+            //db.Entry(category).State = EntityState.Modified;
+
+            //try
+            //{
+            //    await db.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!CategoryExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            //return StatusCode(HttpStatusCode.NoContent);
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                return BadRequest(ModelState);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            if (id != category.CategoryId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(category).State = EntityState.Modified;
+            string root = HttpContext.Current.Server.MapPath("~/Resources/img");
+            var provider = new CustomMultipartFormDataStreamProvider(root);
 
             try
             {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                //read content into a buffer
+                Request.Content.LoadIntoBufferAsync().Wait();
 
-            return StatusCode(HttpStatusCode.NoContent);
+                // Read the form data.
+                await Request.Content.ReadAsMultipartAsync(provider);
+
+                var categoryName = "notfound";
+
+                if (provider.FormData.AllKeys.Contains("cat-name"))
+                {
+                    categoryName = provider.FormData.GetValues("cat-name")[0];
+                }
+
+                var fileName = FileNameHelper.GetFileNameFromLocalPath(provider.FileData[0].LocalFileName);
+                var path = WebConfigurationManager.AppSettings["ImageUrlPath"];
+                Category category = new Category
+                {
+                    Name = categoryName,
+                    ImageUrl = String.Format("{0}/{1}", path, fileName)
+                };
+                db.Categories.Add(category);
+                await db.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
         }        
 
-        // POST: api/Categories        
-        public async Task<IHttpActionResult> PostCategory()
+        // POST: api/Categories/CreateCategory
+        [HttpPost]
+        [Route("CreateCategory")]
+        public async Task<IHttpActionResult> CreateCategory()
         {
             // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
@@ -113,7 +162,7 @@ namespace ShoppingTech.Areas.Admin.Controllers
                 db.Categories.Add(category);
                 await db.SaveChangesAsync();
 
-                return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);                          
+                return Ok();
             }
             catch (System.Exception e)
             {
@@ -123,6 +172,8 @@ namespace ShoppingTech.Areas.Admin.Controllers
 
         // DELETE: api/Categories/5
         [ResponseType(typeof(Category))]
+        [HttpDelete]
+        [Route("DeleteCategory")]
         public async Task<IHttpActionResult> DeleteCategory(Guid id)
         {
             Category category = await db.Categories.FindAsync(id);
