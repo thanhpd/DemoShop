@@ -98,26 +98,26 @@ namespace ShoppingTech.Areas.Admin.Controllers
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                var categoryName = "notfound";
+                var categoryName = Extraction.ExtractValue("cat-name", provider.FormData);
+                var id = Guid.Parse(Extraction.ExtractValue("cat-id", provider.FormData));
 
-                if (provider.FormData.AllKeys.Contains("cat-name"))
+                if (CategoryExists(id))
                 {
-                    categoryName = provider.FormData.GetValues("cat-name")[0];
+                    var category = await db.Categories.FindAsync(id);
+                    category.Name = categoryName;
+                    if (provider.FileData.Any())
+                    {
+                        var fileName = FileNameHelper.GetFileNameFromLocalPath(provider.FileData[0].LocalFileName);
+                        var path = WebConfigurationManager.AppSettings["ImageUrlPath"];
+                        category.ImageUrl = String.Format("{0}/{1}", path, fileName);
+                    }
+                    db.Entry(category).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return Ok();
                 }
-
-                var fileName = FileNameHelper.GetFileNameFromLocalPath(provider.FileData[0].LocalFileName);
-                var path = WebConfigurationManager.AppSettings["ImageUrlPath"];
-                Category category = new Category
-                {
-                    Name = categoryName,
-                    ImageUrl = String.Format("{0}/{1}", path, fileName)
-                };
-                db.Categories.Add(category);
-                await db.SaveChangesAsync();
-
-                return Ok();
+                return BadRequest();
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return InternalServerError(e);
             }
@@ -145,12 +145,7 @@ namespace ShoppingTech.Areas.Admin.Controllers
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                var categoryName = "notfound";
-
-                if (provider.FormData.AllKeys.Contains("cat-name"))
-                {
-                    categoryName = provider.FormData.GetValues("cat-name")[0];
-                }
+                var categoryName = Extraction.ExtractValue("cat-name", provider.FormData);
 
                 var fileName = FileNameHelper.GetFileNameFromLocalPath(provider.FileData[0].LocalFileName);
                 var path = WebConfigurationManager.AppSettings["ImageUrlPath"];
@@ -183,7 +178,11 @@ namespace ShoppingTech.Areas.Admin.Controllers
             }
 
             db.Categories.Remove(category);
-            await db.SaveChangesAsync();
+            string root = HttpContext.Current.Server.MapPath("~/");
+            FileHelper.DeleteFile(root + category.ImageUrl);
+
+            await db.SaveChangesAsync();            
+
 
             return Ok(category);
         }

@@ -19,8 +19,8 @@
                     </div>
                     <div>
                         <label for="add-cat-img">Image File</label>
-                        <input name="image1" type="file" id="add-cat-img"/>
-                        <img id="add-img-preview" class="upload-img-preview"/>
+                        <input name="image1" type="file" id="add-cat-img" />
+                        <img id="add-img-preview" class="upload-img-preview" />
                     </div>
 
                 </div>
@@ -28,7 +28,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Add item</button>
                 </div>
-            </form>             
+            </form>
         </div>
     </div>
 </div>
@@ -42,27 +42,27 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="editModalLabel">Edit category</h4>
             </div>
-            <div class="modal-body">
-                <form id="edit-cat-form" name="edit-form" method="post" enctype="multipart/form-data">
+            <form id="edit-cat-form" name="edit-form" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
                     <div>
-                        <label>Category ID</label><br/>                        
-                        <input name="cat-id" type="text" id="cat-id" disabled="disabled"/>
+                        <label>Category ID</label><br />
+                        <input name="cat-id" type="text" id="cat-id" disabled="disabled" />
                     </div>
                     <div>
-                        <label for="edit-cat-name">Category Name</label><br/>
-                        <input name="cat-name" type="text" id="edit-cat-name"/>
+                        <label for="edit-cat-name">Category Name</label><br />
+                        <input name="cat-name" type="text" id="edit-cat-name" />
                     </div>
                     <div>
                         <label for="edit-cat-img">Image File</label>
-                        <input name="image1" type="file" id="edit-cat-img"/>
-                        <img id="edit-img-preview" class="upload-img-preview"/>
+                        <input name="image1" type="file" id="edit-cat-img" />
+                        <img id="edit-img-preview" class="upload-img-preview" />
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="deleteModalLabel">Delete category</h4>
-            </div>            
+            </div>
             <div class="modal-body">
                 Are you sure to delete this category?
                 <div id="rowId"></div>
@@ -106,28 +106,28 @@
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
-            <tr>
-                <th>Category ID</th>
-                <th>Category Name</th>
-                <th>Image</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var category in Model)
-            {
-                <tr id="@category.CategoryId">
-                    <th>@category.CategoryId</th>
-                    <th>@category.Name</th>
-                    <th>
-                        <img src="@category.ImageUrl" alt="@category.Name" />                        
-                    </th>
-                    <th>
-                        <button type="button" class="btn btn-default edit-category" data-toggle="modal" data-target="#editModal">Edit</button>
-                        <button type="button" class="btn btn-danger delete-category" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                    </th>                    
-                </tr>
-            }
+                @foreach (var category in Model)
+                {
+                    <tr id="@category.CategoryId">
+                        <th>@category.CategoryId</th>
+                        <th>@category.Name</th>
+                        <th>
+                            <img src="@category.ImageUrl" alt="@category.Name" />
+                        </th>
+                        <th>
+                            <button type="button" class="btn btn-default edit-category" data-toggle="modal" data-target="#editModal">Edit</button>
+                            <button type="button" class="btn btn-danger delete-category" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                        </th>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
