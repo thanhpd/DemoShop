@@ -16,4 +16,8 @@ form label {
   outline-style: none;
 }
 
+.upload-img-preview {
+  max-width: 50%;
+}
+
 /*# sourceMappingURL=general.css.map */

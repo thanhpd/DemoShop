@@ -19,7 +19,8 @@
                     </div>
                     <div>
                         <label for="add-cat-img">Image File</label>
-                        <input name="image1" type="file" id="add-cat-img" />
+                        <input name="image1" type="file" id="add-cat-img"/>
+                        <img id="add-img-preview" class="upload-img-preview"/>
                     </div>
 
                 </div>
@@ -44,12 +45,17 @@
             <div class="modal-body">
                 <form name="edit-form" method="post" enctype="multipart/form-data" action="api/upload">
                     <div>
+                        <label>Category ID</label>
+                        <label id="cat-id"></label>
+                    </div>
+                    <div>
                         <label for="edit-cat-name">Category Name</label>
-                        <input name="cat-name" type="text" id="edit-cat-name" />
+                        <input name="cat-name" type="text" id="edit-cat-name"/>
                     </div>
                     <div>
                         <label for="edit-cat-img">Image File</label>
-                        <input name="image1" type="file" id="edit-cat-img" />
+                        <input name="image1" type="file" id="edit-cat-img"/>
+                        <img id="edit-img-preview" class="upload-img-preview"/>
                     </div>
                 </form>
             </div>
@@ -74,8 +80,8 @@
                 <div id="rowId"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="delete-cat">Confirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="delete-cat">Confirm</button>
             </div>
         </div>
     </div>
@@ -114,12 +120,12 @@
                     <th>@category.CategoryId</th>
                     <th>@category.Name</th>
                     <th>
-                        <img src="@category.ImageUrl" alt="@category.Name"/>
+                        <img src="@category.ImageUrl" alt="@category.Name" />                        
                     </th>
                     <th>
-                        <button type="button" class="btn btn-default edit-category">Edit</button>
+                        <button type="button" class="btn btn-default edit-category" data-toggle="modal" data-target="#editModal">Edit</button>
                         <button type="button" class="btn btn-danger delete-category" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                    </th>
+                    </th>                    
                 </tr>
             }
             </tbody>

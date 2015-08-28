@@ -91,14 +91,7 @@ namespace ShoppingTech.Areas.Admin.Controllers
             try
             {
                 //read content into a buffer
-                Request.Content.LoadIntoBufferAsync().Wait();
-
-                //Request.Content.ReadAsStringAsync().ContinueWith(t =>
-                //{
-                //    apiRequest.Content = t.Result;
-                //    _repo.Add(apiRequest);
-                //});
-
+                Request.Content.LoadIntoBufferAsync().Wait();                
 
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
